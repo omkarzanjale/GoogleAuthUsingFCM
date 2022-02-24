@@ -22,7 +22,48 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         self.userViewModel = UserViewModel()
     }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func resetComponentsToDefault() {
+        self.activityIndicator.stopAnimating()
+        self.view.backgroundColor = .white
+        self.signUnBtn.isEnabled = true
+    }
 
+    private func validateSignInInput() ->(email: String, password: String, name: String)? {
+        guard let email = emailTextField.text else {return nil }
+        guard let reEnteredPassword = reEnteredPasswordTextField.text else {return nil }
+        guard let password = passwordTextField.text else { return nil}
+        guard let name = nameTextField.text else {return nil}
+        if email.isEmpty{
+            self.resetComponentsToDefault()
+            self.showAlert(title: "Warning", message: "Enter Email")
+        }else {
+            if password.isEmpty && reEnteredPassword.isEmpty {
+                self.resetComponentsToDefault()
+                self.showAlert(title: "Warning", message: "Enter Password")
+            } else {
+                if password == reEnteredPassword {
+                    if name.isEmpty {
+                        self.resetComponentsToDefault()
+                        self.showAlert(title: "Warning", message: "Enter Name!")
+                    }else {
+                        return (email,password,name)
+                    }
+                } else {
+                    self.resetComponentsToDefault()
+                    self.showAlert(title: "Warning", message: "Both Password must be same")
+                }
+            }
+        }
+        return nil
+    }
+    
     private func navigateToHomePage() {
         if let homeViewControllerObj = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
             homeViewControllerObj.userData = userViewModel?.user
@@ -34,14 +75,10 @@ class SignUpViewController: UIViewController {
         self.activityIndicator.startAnimating()
         self.view.backgroundColor = .gray
         self.signUnBtn.isEnabled = false
-        guard let email = emailTextField.text else {return}
-        guard let password = passwordTextField.text else {return}
-        guard let name = nameTextField.text else {return}
-        userViewModel?.registerNewUser(withEmail: email, password: password, name: name) { [weak self] in
+        guard let data = validateSignInInput() else { return }
+        userViewModel?.registerNewUser(withEmail: data.email, password: data.password, name: data.name) { [weak self] in
             DispatchQueue.main.async {
-                self?.activityIndicator.stopAnimating()
-                self?.view.backgroundColor = .white
-                self?.signUnBtn.isEnabled = true
+                self?.resetComponentsToDefault()
                 self?.navigateToHomePage()
             }
         }

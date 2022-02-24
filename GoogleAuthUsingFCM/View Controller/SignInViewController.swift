@@ -25,17 +25,37 @@ class SignInViewController: UIViewController {
         })
     }
     
+    private func resetComponentsToDefault() {
+        self.signInBtn.isEnabled = true
+        self.activityIndicator.stopAnimating()
+        self.view.backgroundColor = .white
+    }
+    
+    private func validateSignInInput() ->(email: String, password: String)? {
+        guard let email = emailTextField.text else {return nil }
+        guard let password = passwordTextField.text else { return nil}
+        if email.isEmpty{
+            self.resetComponentsToDefault()
+            self.showAlert(title: "Warning", message: "Enter Email")
+        }else {
+            if password.isEmpty {
+                self.resetComponentsToDefault()
+                self.showAlert(title: "Warning", message: "Enter Password")
+            } else {
+                return (email,password)
+            }
+        }
+        return nil
+    }
+    
     @IBAction func signInBtnAction(_ sender: Any) {
         self.activityIndicator.startAnimating()
         self.view.backgroundColor = .gray
         self.signInBtn.isEnabled = false
-        guard let email = emailTextField.text else {return}
-        guard let password = passwordTextField.text else {return}
-        userViewModel?.loginUser(withEmail: email, password: password) {[weak self] in
+        guard let data = validateSignInInput() else {return}
+        userViewModel?.loginUser(withEmail: data.email, password: data.password) {[weak self] in
             DispatchQueue.main.async {
-                self?.signInBtn.isEnabled = true
-                self?.activityIndicator.stopAnimating()
-                self?.view.backgroundColor = .white
+                self?.resetComponentsToDefault()
                 self?.navigateToHomePage()
             }
         }
