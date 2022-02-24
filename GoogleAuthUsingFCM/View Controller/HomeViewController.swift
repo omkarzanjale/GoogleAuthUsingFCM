@@ -17,7 +17,12 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.config()
+    }
+    
+    private func config() {
         title = "Home"
+        self.navigationItem.hidesBackButton = true
         guard let user = userData as? User else {return}
         self.userNameLabel.text = user.displayName
     }

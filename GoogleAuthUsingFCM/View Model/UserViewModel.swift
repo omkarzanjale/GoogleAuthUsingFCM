@@ -12,14 +12,18 @@ import FirebaseAuth
 
 class UserViewModel {
     
-    private(set) var user: User? 
-   // var userUpdate: (()->())? = nil
+    private(set) var user: User?
     
-    init(controller: UIViewController) {
-        googleSignIn(controller: controller)
+    func restorePreviouslyLogin(complisherHandler:()->()) {
+        if Auth.auth().currentUser != nil {
+            self.user = Auth.auth().currentUser
+            complisherHandler()
+        } 
     }
     
-    private func googleSignIn(controller: UIViewController) {
+    
+    //MARK: Google
+    func googleSignIn(controller: UIViewController,complesherHandler:@escaping ()->()) {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         let config = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.signIn(with: config, presenting: controller ) { [unowned self] user, error in
@@ -42,7 +46,39 @@ class UserViewModel {
                     return
                 } else {
                     self?.user = authResult?.user
+                    complesherHandler()
                 }
+            }
+        }
+    }
+    
+    //MARK: Email/Password
+    
+    func registerNewUser(withEmail email: String, password: String, name: String, complesherHandler:@escaping ()->()) {
+        
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] auth, error in
+            if error == nil {
+                let changeRequest = auth?.user.createProfileChangeRequest()
+                changeRequest?.displayName = name
+                changeRequest?.commitChanges { [weak self] error in
+                    print("Account Created")
+                    self?.user = auth?.user
+                    complesherHandler()
+                }
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
+    }
+    
+    func loginUser(withEmail email: String, password: String, complesherHandler:@escaping ()->()) {
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] auth, error in
+            if error == nil {
+                print("successful Login")
+                self?.user = auth?.user
+                complesherHandler()
+            } else {
+                print(error!.localizedDescription)
             }
         }
     }
