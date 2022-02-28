@@ -9,10 +9,14 @@ import Foundation
 import FirebaseCore
 import GoogleSignIn
 import FirebaseAuth
+import FirebaseDatabase
 
 class UserViewModel {
     
     private(set) var user: User?
+    private(set) var UsersFromDB = [UserModel]()
+    private let ref = Database.database().reference()
+    typealias failureClosure = ()->()
     
     func restorePreviouslyLogin(complisherHandler:()->()) {
         if Auth.auth().currentUser != nil {
@@ -71,7 +75,7 @@ class UserViewModel {
         }
     }
     
-    func loginUser(withEmail email: String, password: String, complesherHandler:@escaping ()->()) {
+    func loginUser(withEmail email: String, password: String, failed:@escaping failureClosure ,complesherHandler:@escaping ()->()) {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] auth, error in
             if error == nil {
                 print("successful Login")
@@ -79,7 +83,34 @@ class UserViewModel {
                 complesherHandler()
             } else {
                 print(error!.localizedDescription)
+                failed()
             }
+        }
+    }
+    
+    
+    //MARK: Realtime database
+    
+    func addUserToRealtimeDB(name: String, email: String, password: String, complisherHandler: @escaping()->()) {
+        ref.child("Users").childByAutoId().setValue(["Name":name,"Email":email,"Password":password]) { error, reference in
+            if let err = error {
+                print(err.localizedDescription)
+                
+            } else {
+                print("successfully added")
+                complisherHandler()
+            }
+        }
+    }
+    
+    func getUsersFromRealtimeDB(complisherHandle:@escaping()->()) {
+        self.ref.child("Users").queryOrderedByKey().observe(.childAdded) { [weak self] snapShot in
+            guard let name = (snapShot.value as? NSDictionary)?["Name"] as? String else{return}
+            guard let email = (snapShot.value as? NSDictionary)?["Email"] as? String else{return}
+            guard let password = (snapShot.value as? NSDictionary)?["Password"] as? String else{return}
+            let user = UserModel(name: name, email: email, password: password)
+            self?.UsersFromDB.append(user)
+            complisherHandle()
         }
     }
     

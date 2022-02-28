@@ -83,4 +83,18 @@ class SignUpViewController: UIViewController {
             }
         }
     }
+    
+    func navigateToFirebaseDataVC() {
+        if let fireBaseDataViewControllerObj = self.storyboard?.instantiateViewController(withIdentifier: "FireBaseDataViewController") as? FireBaseDataViewController {
+            self.navigationController?.pushViewController(fireBaseDataViewControllerObj, animated: true)
+        }
+    }
+    
+    @IBAction func firebaseDBBtnAction() {
+        guard let data = validateSignInInput() else {return}
+        self.userViewModel?.addUserToRealtimeDB(name: data.name, email: data.email, password: data.password) {[weak self] in
+            self?.navigateToFirebaseDataVC()
+        }
+    }
+
 }

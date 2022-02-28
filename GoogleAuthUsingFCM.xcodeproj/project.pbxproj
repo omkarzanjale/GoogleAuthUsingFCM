@@ -16,6 +16,9 @@
 		840C62D227C5FC66002D6E1D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C62D127C5FC66002D6E1D /* HomeViewController.swift */; };
 		840C62D427C609F6002D6E1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 840C62D327C609F6002D6E1D /* GoogleService-Info.plist */; };
 		840C62D727C616B1002D6E1D /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C62D627C616B1002D6E1D /* UserViewModel.swift */; };
+		8496EB0B27C8F9DE004153D5 /* FireBaseDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EB0A27C8F9DD004153D5 /* FireBaseDataViewController.swift */; };
+		8496EB0E27C8FAC1004153D5 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EB0D27C8FAC1004153D5 /* DataTableViewCell.swift */; };
+		8496EB1127C914F4004153D5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EB1027C914F4004153D5 /* UserModel.swift */; };
 		84BA98FA27C74581003EAB82 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA98F927C74580003EAB82 /* SignUpViewController.swift */; };
 		E306DB7881C8CE8AF97C6A98 /* Pods_GoogleAuthUsingFCM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B84B26D19AF5326F8E8F41E1 /* Pods_GoogleAuthUsingFCM.framework */; };
 /* End PBXBuildFile section */
@@ -33,6 +36,9 @@
 		840C62D127C5FC66002D6E1D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		840C62D327C609F6002D6E1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		840C62D627C616B1002D6E1D /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		8496EB0A27C8F9DD004153D5 /* FireBaseDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseDataViewController.swift; sourceTree = "<group>"; };
+		8496EB0D27C8FAC1004153D5 /* DataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
+		8496EB1027C914F4004153D5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		84BA98F927C74580003EAB82 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		ACCF6443471CCCD0D95EFCB1 /* Pods-GoogleAuthUsingFCM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleAuthUsingFCM.debug.xcconfig"; path = "Target Support Files/Pods-GoogleAuthUsingFCM/Pods-GoogleAuthUsingFCM.debug.xcconfig"; sourceTree = "<group>"; };
 		B84B26D19AF5326F8E8F41E1 /* Pods_GoogleAuthUsingFCM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoogleAuthUsingFCM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +85,8 @@
 		840C62B727C5F312002D6E1D /* GoogleAuthUsingFCM */ = {
 			isa = PBXGroup;
 			children = (
+				8496EB0F27C914DB004153D5 /* Model */,
+				8496EB0C27C8FA78004153D5 /* TableView Cell */,
 				840C62D527C61687002D6E1D /* View Model */,
 				840C62CC27C5FB94002D6E1D /* Commen */,
 				840C62CD27C5FB9E002D6E1D /* View Controller */,
@@ -104,6 +112,7 @@
 				840C62CF27C5FC13002D6E1D /* SignInViewController.swift */,
 				840C62D127C5FC66002D6E1D /* HomeViewController.swift */,
 				84BA98F927C74580003EAB82 /* SignUpViewController.swift */,
+				8496EB0A27C8F9DD004153D5 /* FireBaseDataViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -124,6 +133,22 @@
 				840C62D627C616B1002D6E1D /* UserViewModel.swift */,
 			);
 			path = "View Model";
+			sourceTree = "<group>";
+		};
+		8496EB0C27C8FA78004153D5 /* TableView Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8496EB0D27C8FAC1004153D5 /* DataTableViewCell.swift */,
+			);
+			path = "TableView Cell";
+			sourceTree = "<group>";
+		};
+		8496EB0F27C914DB004153D5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8496EB1027C914F4004153D5 /* UserModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		BC31498EE0CD0C03D5DE8F77 /* Pods */ = {
@@ -251,12 +276,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8496EB0B27C8F9DE004153D5 /* FireBaseDataViewController.swift in Sources */,
 				84BA98FA27C74581003EAB82 /* SignUpViewController.swift in Sources */,
 				840C62B927C5F312002D6E1D /* AppDelegate.swift in Sources */,
 				840C62BB27C5F312002D6E1D /* SceneDelegate.swift in Sources */,
 				840C62D027C5FC13002D6E1D /* SignInViewController.swift in Sources */,
 				840C62D727C616B1002D6E1D /* UserViewModel.swift in Sources */,
 				840C62D227C5FC66002D6E1D /* HomeViewController.swift in Sources */,
+				8496EB1127C914F4004153D5 /* UserModel.swift in Sources */,
+				8496EB0E27C8FAC1004153D5 /* DataTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

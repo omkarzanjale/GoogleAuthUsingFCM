@@ -6,6 +6,7 @@ target 'GoogleAuthUsingFCM' do
   use_frameworks!
 pod 'FirebaseAuth'
 pod 'GoogleSignIn'
+pod 'Firebase/Database'
   # Pods for GoogleAuthUsingFCM
 
 end

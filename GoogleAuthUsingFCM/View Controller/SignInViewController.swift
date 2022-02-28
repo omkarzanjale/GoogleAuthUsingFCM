@@ -53,7 +53,12 @@ class SignInViewController: UIViewController {
         self.view.backgroundColor = .gray
         self.signInBtn.isEnabled = false
         guard let data = validateSignInInput() else {return}
-        userViewModel?.loginUser(withEmail: data.email, password: data.password) {[weak self] in
+        userViewModel?.loginUser(withEmail: data.email, password: data.password, failed: { [weak self] in
+            DispatchQueue.main.async {
+                self?.resetComponentsToDefault()
+                self?.showAlert(title: "Warning", message: "Inalid Credentials! Try again.")
+            }
+        }) {[weak self] in
             DispatchQueue.main.async {
                 self?.resetComponentsToDefault()
                 self?.navigateToHomePage()
@@ -88,4 +93,7 @@ class SignInViewController: UIViewController {
         })
     }
     
+    @IBAction func firebaseDBBtnAction() {
+        self.signUpBtnAction(UIButton())
+    }
 }
