@@ -20,6 +20,7 @@
 		8496EB0E27C8FAC1004153D5 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EB0D27C8FAC1004153D5 /* DataTableViewCell.swift */; };
 		8496EB1127C914F4004153D5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EB1027C914F4004153D5 /* UserModel.swift */; };
 		84BA98FA27C74581003EAB82 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA98F927C74580003EAB82 /* SignUpViewController.swift */; };
+		84CA7EF827CDF99E00BC9659 /* TextfieldsValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA7EF727CDF99E00BC9659 /* TextfieldsValidation.swift */; };
 		E306DB7881C8CE8AF97C6A98 /* Pods_GoogleAuthUsingFCM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B84B26D19AF5326F8E8F41E1 /* Pods_GoogleAuthUsingFCM.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		8496EB0D27C8FAC1004153D5 /* DataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
 		8496EB1027C914F4004153D5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		84BA98F927C74580003EAB82 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		84CA7EF727CDF99E00BC9659 /* TextfieldsValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldsValidation.swift; sourceTree = "<group>"; };
 		ACCF6443471CCCD0D95EFCB1 /* Pods-GoogleAuthUsingFCM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleAuthUsingFCM.debug.xcconfig"; path = "Target Support Files/Pods-GoogleAuthUsingFCM/Pods-GoogleAuthUsingFCM.debug.xcconfig"; sourceTree = "<group>"; };
 		B84B26D19AF5326F8E8F41E1 /* Pods_GoogleAuthUsingFCM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoogleAuthUsingFCM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -91,6 +93,7 @@
 				840C62CC27C5FB94002D6E1D /* Commen */,
 				840C62CD27C5FB9E002D6E1D /* View Controller */,
 				840C62CE27C5FBAE002D6E1D /* View */,
+				84CA7EF627CDF96C00BC9659 /* TextFieldsValidation */,
 				840C62C627C5F314002D6E1D /* Info.plist */,
 				840C62D327C609F6002D6E1D /* GoogleService-Info.plist */,
 			);
@@ -149,6 +152,14 @@
 				8496EB1027C914F4004153D5 /* UserModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		84CA7EF627CDF96C00BC9659 /* TextFieldsValidation */ = {
+			isa = PBXGroup;
+			children = (
+				84CA7EF727CDF99E00BC9659 /* TextfieldsValidation.swift */,
+			);
+			path = TextFieldsValidation;
 			sourceTree = "<group>";
 		};
 		BC31498EE0CD0C03D5DE8F77 /* Pods */ = {
@@ -276,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84CA7EF827CDF99E00BC9659 /* TextfieldsValidation.swift in Sources */,
 				8496EB0B27C8F9DE004153D5 /* FireBaseDataViewController.swift in Sources */,
 				84BA98FA27C74581003EAB82 /* SignUpViewController.swift in Sources */,
 				840C62B927C5F312002D6E1D /* AppDelegate.swift in Sources */,

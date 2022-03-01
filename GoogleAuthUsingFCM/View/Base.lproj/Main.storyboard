@@ -99,15 +99,15 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Wc-az-JRz">
-                                <rect key="frame" x="153.5" y="425" width="107" height="41"/>
+                                <rect key="frame" x="152" y="425" width="110" height="41"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="107" id="ZAM-TS-hk5"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="110" id="ZAM-TS-hk5"/>
                                     <constraint firstAttribute="height" constant="41" id="bfm-Yr-8YR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="FireBase">
+                                <state key="normal" title="Save Info">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -193,7 +193,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6b-Y5-Nac">
-                                <rect key="frame" x="146.5" y="470" width="121" height="41"/>
+                                <rect key="frame" x="146.5" y="440" width="121" height="41"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="gHK-Y1-CtM"/>
@@ -217,40 +217,71 @@
                                 <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yiv-ff-62T">
-                                <rect key="frame" x="115" y="531" width="184" height="41"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save info to : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NLF-hg-Gi7">
+                                <rect key="frame" x="20" y="511" width="106" height="20.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="41" id="DDj-0b-sXF"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="h0u-mP-l6G"/>
+                                    <constraint firstAttribute="width" constant="106" id="oAB-bm-n2u"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="  Save To Database  ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="firebaseDBBtnAction" destination="1CX-Z9-RgO" eventType="touchUpInside" id="CuK-Vr-CUj"/>
-                                </connections>
-                            </button>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hvr-rA-5If">
+                                <rect key="frame" x="20" y="556.5" width="374" height="34"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yiv-ff-62T">
+                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="34"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="  Realtime DB  ">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="firebaseDBBtnAction" destination="1CX-Z9-RgO" eventType="touchUpInside" id="CuK-Vr-CUj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="alt-qU-1yD">
+                                        <rect key="frame" x="172.5" y="0.0" width="201.5" height="34"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="  Firestore Cloud  ">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="firestoreCloudBtnAction:" destination="1CX-Z9-RgO" eventType="touchUpInside" id="yx2-SQ-UKt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="i6n-D7-Nrs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="W6b-Y5-Nac" firstAttribute="top" secondItem="cIV-pF-O5b" secondAttribute="bottom" constant="50" id="70J-e1-H3H"/>
+                            <constraint firstItem="W6b-Y5-Nac" firstAttribute="top" secondItem="cIV-pF-O5b" secondAttribute="bottom" constant="20" id="70J-e1-H3H"/>
+                            <constraint firstItem="i6n-D7-Nrs" firstAttribute="trailing" secondItem="hvr-rA-5If" secondAttribute="trailing" constant="20" id="9NW-Xi-wkx"/>
                             <constraint firstItem="mug-ci-Z8R" firstAttribute="centerY" secondItem="NVA-qS-Cfe" secondAttribute="centerY" id="ELt-6a-j7D"/>
-                            <constraint firstItem="i6n-D7-Nrs" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="yiv-ff-62T" secondAttribute="bottom" constant="20" id="G4g-SR-gr5"/>
-                            <constraint firstItem="yiv-ff-62T" firstAttribute="top" secondItem="W6b-Y5-Nac" secondAttribute="bottom" constant="20" id="Ifl-oE-LHp"/>
-                            <constraint firstItem="yiv-ff-62T" firstAttribute="centerX" secondItem="NVA-qS-Cfe" secondAttribute="centerX" id="JaS-FD-61p"/>
+                            <constraint firstItem="NLF-hg-Gi7" firstAttribute="top" secondItem="W6b-Y5-Nac" secondAttribute="bottom" constant="30" id="JRW-Gn-NUV"/>
+                            <constraint firstItem="i6n-D7-Nrs" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hvr-rA-5If" secondAttribute="bottom" constant="10" id="MLk-WN-JdK"/>
+                            <constraint firstItem="hvr-rA-5If" firstAttribute="top" secondItem="NLF-hg-Gi7" secondAttribute="bottom" constant="25" id="Ovw-ve-lmX"/>
                             <constraint firstItem="cIV-pF-O5b" firstAttribute="leading" secondItem="i6n-D7-Nrs" secondAttribute="leading" constant="20" id="PZ0-dO-zed"/>
                             <constraint firstItem="cIV-pF-O5b" firstAttribute="top" secondItem="i6n-D7-Nrs" secondAttribute="top" constant="70" id="S7I-gz-DZV"/>
                             <constraint firstItem="W6b-Y5-Nac" firstAttribute="centerX" secondItem="NVA-qS-Cfe" secondAttribute="centerX" id="aRc-yW-0up"/>
+                            <constraint firstItem="NLF-hg-Gi7" firstAttribute="leading" secondItem="i6n-D7-Nrs" secondAttribute="leading" constant="20" id="eqG-wi-gXm"/>
+                            <constraint firstItem="i6n-D7-Nrs" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NLF-hg-Gi7" secondAttribute="trailing" constant="10" id="iBS-PQ-Iqc"/>
                             <constraint firstItem="i6n-D7-Nrs" firstAttribute="trailing" secondItem="cIV-pF-O5b" secondAttribute="trailing" constant="20" id="mSG-Mv-9X0"/>
+                            <constraint firstItem="hvr-rA-5If" firstAttribute="leading" secondItem="i6n-D7-Nrs" secondAttribute="leading" constant="20" id="oG0-1a-CLD"/>
                             <constraint firstItem="mug-ci-Z8R" firstAttribute="centerX" secondItem="NVA-qS-Cfe" secondAttribute="centerX" id="y74-we-HDf"/>
                         </constraints>
                     </view>

@@ -7,6 +7,7 @@ target 'GoogleAuthUsingFCM' do
 pod 'FirebaseAuth'
 pod 'GoogleSignIn'
 pod 'Firebase/Database'
+pod 'Firebase/Firestore'
   # Pods for GoogleAuthUsingFCM
 
 end

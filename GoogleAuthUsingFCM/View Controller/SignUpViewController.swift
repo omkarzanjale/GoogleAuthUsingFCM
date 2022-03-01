@@ -8,7 +8,7 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
-
+    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -34,35 +34,6 @@ class SignUpViewController: UIViewController {
         self.view.backgroundColor = .white
         self.signUnBtn.isEnabled = true
     }
-
-    private func validateSignInInput() ->(email: String, password: String, name: String)? {
-        guard let email = emailTextField.text else {return nil }
-        guard let reEnteredPassword = reEnteredPasswordTextField.text else {return nil }
-        guard let password = passwordTextField.text else { return nil}
-        guard let name = nameTextField.text else {return nil}
-        if email.isEmpty{
-            self.resetComponentsToDefault()
-            self.showAlert(title: "Warning", message: "Enter Email")
-        }else {
-            if password.isEmpty && reEnteredPassword.isEmpty {
-                self.resetComponentsToDefault()
-                self.showAlert(title: "Warning", message: "Enter Password")
-            } else {
-                if password == reEnteredPassword {
-                    if name.isEmpty {
-                        self.resetComponentsToDefault()
-                        self.showAlert(title: "Warning", message: "Enter Name!")
-                    }else {
-                        return (email,password,name)
-                    }
-                } else {
-                    self.resetComponentsToDefault()
-                    self.showAlert(title: "Warning", message: "Both Password must be same")
-                }
-            }
-        }
-        return nil
-    }
     
     private func navigateToHomePage() {
         if let homeViewControllerObj = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
@@ -70,31 +41,61 @@ class SignUpViewController: UIViewController {
             navigationController?.pushViewController(homeViewControllerObj, animated: true)
         }
     }
-    
+    //
+    //MARK: Email/Password Authentication
+    //
     @IBAction func signUpBtnAction(_ sender: Any) {
         self.activityIndicator.startAnimating()
         self.view.backgroundColor = .gray
         self.signUnBtn.isEnabled = false
-        guard let data = validateSignInInput() else { return }
-        userViewModel?.registerNewUser(withEmail: data.email, password: data.password, name: data.name) { [weak self] in
-            DispatchQueue.main.async {
+        if let data = TextfieldsValidation.validateSignInInput(email: emailTextField.text, password: passwordTextField.text, confirmedPass: reEnteredPasswordTextField.text, name: nameTextField.text) {
+            userViewModel?.registerNewUser(withEmail: data.email, password: data.password, name: data.name) { [weak self] in
+                DispatchQueue.main.async {
+                    self?.resetComponentsToDefault()
+                    self?.navigateToHomePage()
+                }
+            } failed: { [weak self]error in
                 self?.resetComponentsToDefault()
-                self?.navigateToHomePage()
+                self?.showAlert(title: "Warning", message: error)
             }
+        } else {
+            self.resetComponentsToDefault()
+            self.showAlert(title: "Warning", message: "Enter valid data in Textfields!")
         }
     }
     
-    func navigateToFirebaseDataVC() {
+    func navigateToFirebaseDataVC(_ fromCloudData: Bool = false) {
         if let fireBaseDataViewControllerObj = self.storyboard?.instantiateViewController(withIdentifier: "FireBaseDataViewController") as? FireBaseDataViewController {
+            fireBaseDataViewControllerObj.dataFromCloud = fromCloudData
             self.navigationController?.pushViewController(fireBaseDataViewControllerObj, animated: true)
         }
     }
-    
+    //
+    //MARK: Realtime Database
+    //
     @IBAction func firebaseDBBtnAction() {
-        guard let data = validateSignInInput() else {return}
-        self.userViewModel?.addUserToRealtimeDB(name: data.name, email: data.email, password: data.password) {[weak self] in
-            self?.navigateToFirebaseDataVC()
+        if let data = TextfieldsValidation.validateSignInInput(email: emailTextField.text, password: passwordTextField.text, confirmedPass: reEnteredPasswordTextField.text, name: nameTextField.text) {
+            self.userViewModel?.addUserToRealtimeDB(name: data.name, email: data.email, password: data.password) {[weak self] in
+                self?.navigateToFirebaseDataVC()
+            }
+        }else {
+            self.resetComponentsToDefault()
+            self.showAlert(title: "Warning", message: "Enter valid data in Textfields!")
         }
     }
-
+    //
+    //MARK: Firestore cloud
+    //
+    @IBAction func firestoreCloudBtnAction(_ sender: Any) {
+        if let data = TextfieldsValidation.validateSignInInput(email: emailTextField.text, password: passwordTextField.text, confirmedPass: reEnteredPasswordTextField.text, name: nameTextField.text){
+            userViewModel?.uploadDataToCloud(name: data.name, email: data.email, password: data.password, complisherHandler: {[weak self] in
+                self?.navigateToFirebaseDataVC(true)
+            }, failed: {[weak self] in
+                self?.showAlert(title: "Warining", message: "Unable to upload data to cloud!")
+            })
+        } else {
+            self.resetComponentsToDefault()
+            self.showAlert(title: "Warning", message: "Enter valid data in Textfields!")
+        }
+    }
 }

@@ -10,13 +10,20 @@ import FirebaseCore
 import GoogleSignIn
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseFirestore
 
 class UserViewModel {
     
     private(set) var user: User?
     private(set) var UsersFromDB = [UserModel]()
+    private(set) var usersfromCloud = [UserModel]()
+    
     private let ref = Database.database().reference()
+    
+    private let firestoreDatabase = Firestore.firestore()
+    
     typealias failureClosure = ()->()
+    typealias successClosure = ()->()
     
     func restorePreviouslyLogin(complisherHandler:()->()) {
         if Auth.auth().currentUser != nil {
@@ -24,9 +31,9 @@ class UserViewModel {
             complisherHandler()
         } 
     }
-    
-    
+    //
     //MARK: Google
+    //
     func googleSignIn(controller: UIViewController,complesherHandler:@escaping ()->()) {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         let config = GIDConfiguration(clientID: clientID)
@@ -55,10 +62,10 @@ class UserViewModel {
             }
         }
     }
-    
-    //MARK: Email/Password
-    
-    func registerNewUser(withEmail email: String, password: String, name: String, complesherHandler:@escaping ()->()) {
+    //
+    //MARK: Email/Password Authentication
+    //
+    func registerNewUser(withEmail email: String, password: String, name: String, complesherHandler:@escaping ()->(),failed: @escaping(String)->()) {
         
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] auth, error in
             if error == nil {
@@ -71,6 +78,7 @@ class UserViewModel {
                 }
             } else {
                 print(error!.localizedDescription)
+                failed(error!.localizedDescription)
             }
         }
     }
@@ -87,11 +95,10 @@ class UserViewModel {
             }
         }
     }
-    
-    
-    //MARK: Realtime database
-    
-    func addUserToRealtimeDB(name: String, email: String, password: String, complisherHandler: @escaping()->()) {
+    //
+    //MARK: Realtime Database
+    //
+    func addUserToRealtimeDB(name: String, email: String, password: String, complisherHandler: @escaping successClosure) {
         ref.child("Users").childByAutoId().setValue(["Name":name,"Email":email,"Password":password]) { error, reference in
             if let err = error {
                 print(err.localizedDescription)
@@ -103,7 +110,7 @@ class UserViewModel {
         }
     }
     
-    func getUsersFromRealtimeDB(complisherHandle:@escaping()->()) {
+    func getUsersFromRealtimeDB(complisherHandle:@escaping successClosure) {
         self.ref.child("Users").queryOrderedByKey().observe(.childAdded) { [weak self] snapShot in
             guard let name = (snapShot.value as? NSDictionary)?["Name"] as? String else{return}
             guard let email = (snapShot.value as? NSDictionary)?["Email"] as? String else{return}
@@ -114,4 +121,39 @@ class UserViewModel {
         }
     }
     
+    //
+    //MARK: Firestore Cloud
+    //
+    func uploadDataToCloud(name: String, email: String, password: String, complisherHandler: @escaping successClosure, failed:@escaping failureClosure) {
+        let docRef = firestoreDatabase.collection("Users").document(email)
+        
+        docRef.setData(["Name":name,"Email":email,"Password":password]) { error in
+            if error == nil {
+                complisherHandler()
+            }else {
+                print(error!.localizedDescription)
+                failed()
+            }
+        }
+    }
+    
+    func getDataFromCloud(complisherHandler:@escaping successClosure) {
+        let docRef = firestoreDatabase.collection("Users")
+        docRef.getDocuments {[weak self] snapshot, error in
+            if error == nil {
+                guard let data = snapshot else {return}
+                for document in data.documents {
+                    let userData = document.data()
+                    guard let name = userData["Name"] as? String else{return}
+                    guard let email = userData["Email"] as? String else{return}
+                    guard let password = userData["Password"] as? String else{return}
+                    let user = UserModel(name: name, email: email, password: password)
+                    self?.usersfromCloud.append(user)
+                }
+                complisherHandler()
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
+    }
 }
