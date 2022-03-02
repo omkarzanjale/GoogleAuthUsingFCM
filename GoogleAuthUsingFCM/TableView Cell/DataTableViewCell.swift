@@ -19,7 +19,7 @@ class DataTableViewCell: UITableViewCell {
             nameLabel.isHidden = true
         }else {
             nameLabel.isHidden = false
-            self.nameLabel.text = "Name : " + user.name
+            self.nameLabel.text = "Name: \(user.name)"
         }
         if user.email.isEmpty {
             emailLabel.isHidden = true

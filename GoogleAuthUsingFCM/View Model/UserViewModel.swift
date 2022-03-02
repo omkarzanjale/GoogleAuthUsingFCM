@@ -102,7 +102,6 @@ class UserViewModel {
         ref.child("Users").childByAutoId().setValue(["Name":name,"Email":email,"Password":password]) { error, reference in
             if let err = error {
                 print(err.localizedDescription)
-                
             } else {
                 print("successfully added")
                 complisherHandler()
@@ -110,8 +109,11 @@ class UserViewModel {
         }
     }
     
+    
+    
     func getUsersFromRealtimeDB(complisherHandle:@escaping successClosure) {
-        self.ref.child("Users").queryOrderedByKey().observe(.childAdded) { [weak self] snapShot in
+        UsersFromDB.removeAll()
+        self.ref.child("Users").observe(.childAdded) { [weak self] snapShot in
             guard let name = (snapShot.value as? NSDictionary)?["Name"] as? String else{return}
             guard let email = (snapShot.value as? NSDictionary)?["Email"] as? String else{return}
             guard let password = (snapShot.value as? NSDictionary)?["Password"] as? String else{return}
@@ -119,6 +121,9 @@ class UserViewModel {
             self?.UsersFromDB.append(user)
             complisherHandle()
         }
+        
+        
+        
     }
     
     //
@@ -153,6 +158,20 @@ class UserViewModel {
                 complisherHandler()
             } else {
                 print(error!.localizedDescription)
+            }
+        }
+    }
+    
+    
+    func setAdditionalInfo(forUser: String, infoLabel: String, data: [String:String],complisherHandler: @escaping successClosure, failed:@escaping failureClosure) {
+        let docRef = firestoreDatabase.collection("Users").document(forUser)
+        let d = docRef.collection("Additional Info").document(infoLabel)
+        d.setData(data) { error in
+            if error == nil {
+                complisherHandler()
+            }else {
+                print(error!.localizedDescription)
+                failed()
             }
         }
     }

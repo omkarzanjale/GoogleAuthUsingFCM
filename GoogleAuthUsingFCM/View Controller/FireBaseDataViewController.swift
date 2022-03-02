@@ -10,8 +10,11 @@ import UIKit
 class FireBaseDataViewController: UIViewController {
 
     @IBOutlet weak var dataList: UITableView!
+    @IBOutlet weak var nameTF: UITextField!
+    @IBOutlet weak var emailTF: UITextField!
+    @IBOutlet weak var passwordTF: UITextField!
     var userViewModel: UserViewModel?
-    var dataFromCloud: Bool = false
+    var dataFromCloud: Bool = false //is/does
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,8 +45,14 @@ class FireBaseDataViewController: UIViewController {
         title = "Cloud Users"
         self.userViewModel?.getDataFromCloud {[weak self] in
             DispatchQueue.main.async {
-                self?.dataList.reloadData()
+                self?.dataList.reloadData()//tbldata
             }
+        }
+    }
+    
+    @IBAction func uploadBtnAction(_ sender: Any) {
+        if let data = TextfieldsValidation.validateSignInInput(email: emailTF.text, password: passwordTF.text, confirmedPass: passwordTF.text, name: nameTF.text) {
+            self.userViewModel?.addUserToRealtimeDB(name: data.name, email: data.email, password: data.password) {}
         }
     }
 }
@@ -72,5 +81,23 @@ extension FireBaseDataViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
+    }
+}
+
+extension FireBaseDataViewController: UITableViewDelegate {
+    
+    private func navigateToDetails(user: String) {
+        if let additinalViewControllerObj = self.storyboard?.instantiateViewController(withIdentifier: "AdditinalInfoViewController") as? AdditinalInfoViewController {
+            additinalViewControllerObj.user = user
+            navigationController?.pushViewController(additinalViewControllerObj, animated: true)
+        }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if dataFromCloud {
+            guard let user = userViewModel?.usersfromCloud[indexPath.row] else{return}
+            navigateToDetails(user: user.email)
+        }
     }
 }

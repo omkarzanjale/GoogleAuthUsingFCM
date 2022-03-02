@@ -80,7 +80,7 @@ class SignUpViewController: UIViewController {
             }
         }else {
             self.resetComponentsToDefault()
-            self.showAlert(title: "Warning", message: "Enter valid data in Textfields!")
+            self.navigateToFirebaseDataVC()
         }
     }
     //

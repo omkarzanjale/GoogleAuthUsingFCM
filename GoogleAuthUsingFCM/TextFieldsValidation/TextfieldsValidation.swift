@@ -13,18 +13,14 @@ class TextfieldsValidation {
         guard let reEnteredPassword = confirmedPass else {return nil }
         guard let password = password else { return nil}
         guard let name = name else {return nil}
-        if email.isEmpty{
+        if email.isEmpty || email.isEmpty {
             return nil
         }else {
             if password.isEmpty && reEnteredPassword.isEmpty {
                 return nil
             } else {
                 if password == reEnteredPassword {
-                    if name.isEmpty {
-                        return nil
-                    }else {
-                        return (email,password,name)
-                    }
+                    return (email,password,name)
                 } else {
                     return nil
                 }

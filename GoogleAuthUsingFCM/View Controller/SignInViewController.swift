@@ -20,6 +20,7 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         title = "Login"
         self.userViewModel = UserViewModel()
+        //userViewModel?.setAdditionalInfo()
         userViewModel?.restorePreviouslyLogin(complisherHandler: {[weak self] in
             self?.navigateToHomePage()
         })
