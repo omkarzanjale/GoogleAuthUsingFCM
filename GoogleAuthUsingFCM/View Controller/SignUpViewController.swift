@@ -66,7 +66,7 @@ class SignUpViewController: UIViewController {
     
     func navigateToFirebaseDataVC(_ fromCloudData: Bool = false) {
         if let fireBaseDataViewControllerObj = self.storyboard?.instantiateViewController(withIdentifier: "FireBaseDataViewController") as? FireBaseDataViewController {
-            fireBaseDataViewControllerObj.dataFromCloud = fromCloudData
+            fireBaseDataViewControllerObj.isDataFromCloud = fromCloudData
             self.navigationController?.pushViewController(fireBaseDataViewControllerObj, animated: true)
         }
     }
