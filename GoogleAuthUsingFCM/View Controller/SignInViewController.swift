@@ -77,7 +77,6 @@ class SignInViewController: UIViewController {
         }
     }
     
-    
     private func navigateToHomePage() {
         if let homeViewControllerObj = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
             homeViewControllerObj.userData = userViewModel?.user
@@ -90,7 +89,6 @@ class SignInViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-    
     
     @IBAction func googleSignInBtnAction(_ sender: Any) {
         self.userViewModel?.googleSignIn(controller: self, complesherHandler: {[weak self] in

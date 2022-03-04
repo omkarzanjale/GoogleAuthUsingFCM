@@ -4,7 +4,6 @@
 //
 //  Created by Admin on 24/02/22.
 //
-
 import UIKit
 
 class SignUpViewController: UIViewController {
