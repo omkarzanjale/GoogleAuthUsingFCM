@@ -25,6 +25,11 @@ class SignInViewController: UIViewController {
         })
     }
     
+    @IBAction func crashlyticsTestBtnAction(_ sender: Any) {
+        let numbers = [0]
+        let _ = numbers[1]
+    }
+    
     private func resetComponentsToDefault() {
         self.signInBtn.isEnabled = true
         self.activityIndicator.stopAnimating()

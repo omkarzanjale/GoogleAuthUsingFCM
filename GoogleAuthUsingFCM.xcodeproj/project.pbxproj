@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3082B2EE915D25C2DD9BD27A /* Pods_GoogleAuthUsingFCM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B08A5D970BA6EE3548553D84 /* Pods_GoogleAuthUsingFCM.framework */; };
 		840C62B927C5F312002D6E1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C62B827C5F312002D6E1D /* AppDelegate.swift */; };
 		840C62BB27C5F312002D6E1D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840C62BA27C5F312002D6E1D /* SceneDelegate.swift */; };
 		840C62C027C5F312002D6E1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840C62BE27C5F312002D6E1D /* Main.storyboard */; };
@@ -22,11 +23,9 @@
 		84A6E99227CF413D00222179 /* AdditinalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A6E99127CF413D00222179 /* AdditinalInfoViewController.swift */; };
 		84BA98FA27C74581003EAB82 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA98F927C74580003EAB82 /* SignUpViewController.swift */; };
 		84CA7EF827CDF99E00BC9659 /* TextfieldsValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CA7EF727CDF99E00BC9659 /* TextfieldsValidation.swift */; };
-		E306DB7881C8CE8AF97C6A98 /* Pods_GoogleAuthUsingFCM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B84B26D19AF5326F8E8F41E1 /* Pods_GoogleAuthUsingFCM.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		41A065308AFD0EC59580F07A /* Pods-GoogleAuthUsingFCM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleAuthUsingFCM.release.xcconfig"; path = "Target Support Files/Pods-GoogleAuthUsingFCM/Pods-GoogleAuthUsingFCM.release.xcconfig"; sourceTree = "<group>"; };
 		840C62B527C5F312002D6E1D /* GoogleAuthUsingFCM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleAuthUsingFCM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		840C62B827C5F312002D6E1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		840C62BA27C5F312002D6E1D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,8 +43,9 @@
 		84A6E99127CF413D00222179 /* AdditinalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditinalInfoViewController.swift; sourceTree = "<group>"; };
 		84BA98F927C74580003EAB82 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		84CA7EF727CDF99E00BC9659 /* TextfieldsValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldsValidation.swift; sourceTree = "<group>"; };
-		ACCF6443471CCCD0D95EFCB1 /* Pods-GoogleAuthUsingFCM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleAuthUsingFCM.debug.xcconfig"; path = "Target Support Files/Pods-GoogleAuthUsingFCM/Pods-GoogleAuthUsingFCM.debug.xcconfig"; sourceTree = "<group>"; };
-		B84B26D19AF5326F8E8F41E1 /* Pods_GoogleAuthUsingFCM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoogleAuthUsingFCM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95AC8C9745027E7922BCFB2E /* Pods-GoogleAuthUsingFCM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleAuthUsingFCM.debug.xcconfig"; path = "Target Support Files/Pods-GoogleAuthUsingFCM/Pods-GoogleAuthUsingFCM.debug.xcconfig"; sourceTree = "<group>"; };
+		B08A5D970BA6EE3548553D84 /* Pods_GoogleAuthUsingFCM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoogleAuthUsingFCM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D01FF7C11E863B0D92C3BBD6 /* Pods-GoogleAuthUsingFCM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleAuthUsingFCM.release.xcconfig"; path = "Target Support Files/Pods-GoogleAuthUsingFCM/Pods-GoogleAuthUsingFCM.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,17 +53,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E306DB7881C8CE8AF97C6A98 /* Pods_GoogleAuthUsingFCM.framework in Frameworks */,
+				3082B2EE915D25C2DD9BD27A /* Pods_GoogleAuthUsingFCM.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		657CBAAE776DC7147E9C5FE7 /* Frameworks */ = {
+		7707F073CD8DCCF297D24FE2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B84B26D19AF5326F8E8F41E1 /* Pods_GoogleAuthUsingFCM.framework */,
+				B08A5D970BA6EE3548553D84 /* Pods_GoogleAuthUsingFCM.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -74,7 +74,7 @@
 				840C62B727C5F312002D6E1D /* GoogleAuthUsingFCM */,
 				840C62B627C5F312002D6E1D /* Products */,
 				BC31498EE0CD0C03D5DE8F77 /* Pods */,
-				657CBAAE776DC7147E9C5FE7 /* Frameworks */,
+				7707F073CD8DCCF297D24FE2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -168,8 +168,8 @@
 		BC31498EE0CD0C03D5DE8F77 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				ACCF6443471CCCD0D95EFCB1 /* Pods-GoogleAuthUsingFCM.debug.xcconfig */,
-				41A065308AFD0EC59580F07A /* Pods-GoogleAuthUsingFCM.release.xcconfig */,
+				95AC8C9745027E7922BCFB2E /* Pods-GoogleAuthUsingFCM.debug.xcconfig */,
+				D01FF7C11E863B0D92C3BBD6 /* Pods-GoogleAuthUsingFCM.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -181,11 +181,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 840C62C927C5F314002D6E1D /* Build configuration list for PBXNativeTarget "GoogleAuthUsingFCM" */;
 			buildPhases = (
-				267E4AA8D4D15D7661008F99 /* [CP] Check Pods Manifest.lock */,
+				C976ADC746DB98D2F3FC19E5 /* [CP] Check Pods Manifest.lock */,
 				840C62B127C5F312002D6E1D /* Sources */,
 				840C62B227C5F312002D6E1D /* Frameworks */,
 				840C62B327C5F312002D6E1D /* Resources */,
-				08FD6D2DD9E01F24B44903F3 /* [CP] Embed Pods Frameworks */,
+				848BA87627D1EFED002F9E91 /* ShellScript */,
+				43C9947B83E46D7DD07E4B9D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -244,7 +245,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		08FD6D2DD9E01F24B44903F3 /* [CP] Embed Pods Frameworks */ = {
+		43C9947B83E46D7DD07E4B9D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -261,7 +262,25 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GoogleAuthUsingFCM/Pods-GoogleAuthUsingFCM-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		267E4AA8D4D15D7661008F99 /* [CP] Check Pods Manifest.lock */ = {
+		848BA87627D1EFED002F9E91 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		C976ADC746DB98D2F3FC19E5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -444,12 +463,13 @@
 		};
 		840C62CA27C5F314002D6E1D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ACCF6443471CCCD0D95EFCB1 /* Pods-GoogleAuthUsingFCM.debug.xcconfig */;
+			baseConfigurationReference = 95AC8C9745027E7922BCFB2E /* Pods-GoogleAuthUsingFCM.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GoogleAuthUsingFCM/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -472,7 +492,7 @@
 		};
 		840C62CB27C5F314002D6E1D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 41A065308AFD0EC59580F07A /* Pods-GoogleAuthUsingFCM.release.xcconfig */;
+			baseConfigurationReference = D01FF7C11E863B0D92C3BBD6 /* Pods-GoogleAuthUsingFCM.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

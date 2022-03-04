@@ -144,7 +144,14 @@
                             <constraint firstItem="dUC-TC-NKo" firstAttribute="centerX" secondItem="lc9-TX-3vI" secondAttribute="centerX" constant="-1" id="xDU-zk-yVX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="XuT-i1-uqZ"/>
+                    <navigationItem key="navigationItem" id="XuT-i1-uqZ">
+                        <barButtonItem key="rightBarButtonItem" image="trash.circle" catalog="system" id="sx9-Xv-8yK">
+                            <color key="tintColor" systemColor="systemRedColor"/>
+                            <connections>
+                                <action selector="crashlyticsTestBtnAction:" destination="JUZ-QI-AvA" id="lfZ-6l-2E0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="Hlw-x7-EUC" id="O7y-Eh-Hpt"/>
                         <outlet property="emailTextField" destination="j5p-kK-gcx" id="mRr-pp-P5F"/>
@@ -666,6 +673,7 @@
     </scenes>
     <resources>
         <image name="output-onlinepngtools" width="30" height="23"/>
+        <image name="trash.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
