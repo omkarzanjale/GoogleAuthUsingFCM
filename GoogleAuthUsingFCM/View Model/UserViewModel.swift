@@ -239,14 +239,16 @@ class UserViewModel {
     }
     
     func setAdditionalInfo(forUser: String, infoLabel: String, data: [String:String],complisherHandler: @escaping successClosure, failed:@escaping failureClosure) {
-        let docRef = firestoreDatabase.collection("Users").document(forUser)
-        let d = docRef.collection("Additional Info").document(infoLabel)
-        d.setData(data) { error in
-            if error == nil {
-                complisherHandler()
-            }else {
-                print(error!.localizedDescription)
-                failed()
+        self.setCount {[weak self] in
+            guard let docRef = self?.firestoreDatabase.collection("Users").document("\(self?.counter ?? 0)") else {return}
+            let d = docRef.collection("Additional Info").document(infoLabel)
+            d.setData(data) { error in
+                if error == nil {
+                    complisherHandler()
+                }else {
+                    print(error!.localizedDescription)
+                    failed()
+                }
             }
         }
     }
