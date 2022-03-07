@@ -10,6 +10,7 @@ pod 'FirebaseAuth'
 pod 'GoogleSignIn'
 pod 'Firebase/Database'
 pod 'Firebase/Firestore'
+pod 'Firebase/Storage'
   # Pods for GoogleAuthUsingFCM
 
 end

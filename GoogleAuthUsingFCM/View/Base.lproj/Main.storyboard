@@ -314,13 +314,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xub-6H-OmV">
-                                <rect key="frame" x="20" y="94" width="374" height="32"/>
+                                <rect key="frame" x="20" y="138" width="374" height="32"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nva-VM-lk2">
-                                <rect key="frame" x="20" y="226" width="65" height="24"/>
+                                <rect key="frame" x="20" y="270" width="65" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="qu4-VP-XF6"/>
                                 </constraints>
@@ -329,7 +329,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYK-t7-27g">
-                                <rect key="frame" x="95" y="226" width="102" height="24"/>
+                                <rect key="frame" x="95" y="270" width="102" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -354,32 +354,60 @@
                                     <action selector="signoutBtnAction:" destination="PdD-do-gfo" eventType="touchUpInside" id="niV-f6-Jgj"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="58E-Tp-LwO">
+                                <rect key="frame" x="0.0" y="314" width="414" height="477"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="PdD-do-gfo" id="aPC-RF-Skm"/>
+                                    <outlet property="delegate" destination="PdD-do-gfo" id="cVH-0G-N6x"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ays-Vl-VYr"/>
                         <color key="backgroundColor" red="0.79205951927210161" green="1" blue="0.95870163319338209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Ays-Vl-VYr" firstAttribute="trailing" secondItem="58E-Tp-LwO" secondAttribute="trailing" id="1Zh-Ba-DCV"/>
                             <constraint firstItem="ZYK-t7-27g" firstAttribute="leading" secondItem="Nva-VM-lk2" secondAttribute="trailing" constant="10" id="Cmn-uH-hnb"/>
                             <constraint firstItem="Nva-VM-lk2" firstAttribute="top" secondItem="xub-6H-OmV" secondAttribute="bottom" constant="100" id="HBh-1D-rSZ"/>
                             <constraint firstItem="xub-6H-OmV" firstAttribute="top" secondItem="Ays-Vl-VYr" secondAttribute="top" constant="50" id="Hld-8K-9xS"/>
                             <constraint firstItem="ZYK-t7-27g" firstAttribute="top" secondItem="Nva-VM-lk2" secondAttribute="top" id="QTe-yZ-3QC"/>
                             <constraint firstItem="xub-6H-OmV" firstAttribute="leading" secondItem="Ays-Vl-VYr" secondAttribute="leading" constant="20" id="Tya-Md-kOA"/>
                             <constraint firstItem="Rxl-jW-TLU" firstAttribute="centerX" secondItem="CMD-oC-1GB" secondAttribute="centerX" id="bjo-B6-b4d"/>
+                            <constraint firstItem="58E-Tp-LwO" firstAttribute="leading" secondItem="Ays-Vl-VYr" secondAttribute="leading" id="dES-jO-L8l"/>
                             <constraint firstItem="Nva-VM-lk2" firstAttribute="leading" secondItem="Ays-Vl-VYr" secondAttribute="leading" constant="20" id="djy-GS-STs"/>
                             <constraint firstItem="Ays-Vl-VYr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZYK-t7-27g" secondAttribute="trailing" constant="20" id="fE1-2q-j1u"/>
                             <constraint firstItem="Ays-Vl-VYr" firstAttribute="bottom" secondItem="Rxl-jW-TLU" secondAttribute="bottom" constant="20" id="fry-Hy-Yv4"/>
-                            <constraint firstItem="Rxl-jW-TLU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZYK-t7-27g" secondAttribute="bottom" constant="10" id="h2p-Jl-Tw9"/>
+                            <constraint firstItem="58E-Tp-LwO" firstAttribute="top" secondItem="ZYK-t7-27g" secondAttribute="bottom" constant="20" id="jGT-zJ-vSv"/>
                             <constraint firstItem="Ays-Vl-VYr" firstAttribute="trailing" secondItem="xub-6H-OmV" secondAttribute="trailing" constant="20" id="pth-58-z9D"/>
+                            <constraint firstItem="Rxl-jW-TLU" firstAttribute="top" secondItem="58E-Tp-LwO" secondAttribute="bottom" constant="10" id="qcz-JM-Exs"/>
                             <constraint firstItem="Ays-Vl-VYr" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Rxl-jW-TLU" secondAttribute="trailing" constant="20" id="vR6-XU-Zdq"/>
                             <constraint firstItem="Rxl-jW-TLU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ays-Vl-VYr" secondAttribute="leading" constant="20" id="zY7-LR-O1l"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="nBy-9b-a3A">
+                        <rightBarButtonItems>
+                            <barButtonItem image="icloud.and.arrow.up" catalog="system" id="laK-14-4Vc">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="uploadImgBtnAction:" destination="PdD-do-gfo" id="qTu-br-ywe"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="arrow.up.doc" catalog="system" id="oBN-DC-l06">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="uploadFileBtnAction:" destination="PdD-do-gfo" id="Tdf-Wc-mm3"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
+                        <outlet property="tblView" destination="58E-Tp-LwO" id="f5j-uj-Rzy"/>
                         <outlet property="userNameLabel" destination="ZYK-t7-27g" id="fwS-cH-0QB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Gt-hg-x1l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2564" y="-232"/>
+            <point key="canvasLocation" x="3473.913043478261" y="-232.36607142857142"/>
         </scene>
         <!--Fire Base Data View Controller-->
         <scene sceneID="SVH-Jh-p8x">
@@ -618,7 +646,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ih3-iN-qQh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3307" y="71"/>
+            <point key="canvasLocation" x="3474" y="431"/>
         </scene>
         <!--Item 2-->
         <scene sceneID="hiI-57-Vey">
@@ -634,7 +662,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fj3-NC-LJO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5751" y="374"/>
+            <point key="canvasLocation" x="6660.8695652173919" y="373.66071428571428"/>
         </scene>
         <!--Item 1-->
         <scene sceneID="2kT-7c-73R">
@@ -650,7 +678,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xbo-4D-JXk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5751" y="-232"/>
+            <point key="canvasLocation" x="6660.8695652173919" y="-232.36607142857142"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r8k-Fh-VGj">
@@ -670,8 +698,28 @@
             </objects>
             <point key="canvasLocation" x="94.20289855072464" y="70.982142857142847"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lI1-pi-Ody">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tDQ-Ff-OIa" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fap-TK-Hsx">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="PdD-do-gfo" kind="relationship" relationship="rootViewController" id="mEg-pz-iXX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tko-66-k2i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2563.768115942029" y="-232.36607142857142"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="arrow.up.doc" catalog="system" width="115" height="128"/>
+        <image name="icloud.and.arrow.up" catalog="system" width="128" height="106"/>
         <image name="output-onlinepngtools" width="30" height="23"/>
         <image name="trash.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
