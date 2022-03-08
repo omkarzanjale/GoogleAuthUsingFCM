@@ -513,6 +513,7 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -522,6 +523,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - FirebaseAuth
   - GoogleSignIn
+  - Toast-Swift
 
 SPEC REPOS:
   trunk:
@@ -549,6 +551,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - Toast-Swift
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -575,7 +578,8 @@ SPEC CHECKSUMS:
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 7b85508497b189683579a59cc4d0d98351c79cf7
+PODFILE CHECKSUM: a1eed936ee19110d0e4ba633b19cc3d1b39b8b3a
 
 COCOAPODS: 1.11.2

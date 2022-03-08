@@ -11,6 +11,7 @@ pod 'GoogleSignIn'
 pod 'Firebase/Database'
 pod 'Firebase/Firestore'
 pod 'Firebase/Storage'
+pod 'Toast-Swift'
   # Pods for GoogleAuthUsingFCM
 
 end

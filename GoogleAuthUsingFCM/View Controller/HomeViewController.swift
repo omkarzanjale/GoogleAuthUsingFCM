@@ -10,6 +10,7 @@ import GoogleSignIn
 import FirebaseAuth
 import MobileCoreServices
 import UniformTypeIdentifiers
+import Toast_Swift
 
 class HomeViewController: UIViewController {
     
@@ -19,16 +20,19 @@ class HomeViewController: UIViewController {
     var storageDataViewModel = StorageDataViewModel()
 
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var photosBtn: UIButton!
+    @IBOutlet weak var documentsBtn: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var dataCollectionView: UICollectionView!
    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.config()
-        storageDataViewModel.getFile("Documents"){
-            DispatchQueue.main.async {
-                self.dataCollectionView.reloadData()
-            }
-        }
+    }
+    
+    private func resetComponentsToDefault() {
+        self.activityIndicator.stopAnimating()
+        self.dataCollectionView.isHidden = false
     }
     
     private func config() {
@@ -38,8 +42,11 @@ class HomeViewController: UIViewController {
         self.userNameLabel.text = user.displayName
         self.dataCollectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCollectionViewCell")
         addLayout()
+        PhotosBtnAction(UIButton())
     }
-
+    //
+    //MARK: Upload data
+    //
     @IBAction func uploadFileBtnAction(_ sender: Any) {
         docControllorConfig()
     }
@@ -47,7 +54,56 @@ class HomeViewController: UIViewController {
     @IBAction func uploadImgBtnAction(_ sender: Any) {
         imagePickerControllerConfig()
     }
+    //
+    //MARK: Display File Btns Action
+    //
+    @IBAction func PhotosBtnAction(_ sender: Any) {
+        self.photosBtn.backgroundColor = .lightGray
+        self.documentsBtn.backgroundColor = .none
+        self.documentsBtn.isEnabled = false
+        self.dataCollectionView.isHidden = true
+        self.activityIndicator.startAnimating()
+        storageDataViewModel.getFile("Photos"){
+            DispatchQueue.main.async {
+                self.resetComponentsToDefault()
+                self.dataCollectionView.reloadData()
+                self.documentsBtn.isEnabled = true
+            }
+        }showNote: { [weak self] note,isFailed in
+            self?.view.makeToast(note)
+            if isFailed{
+                self?.resetComponentsToDefault()
+                self?.dataCollectionView.reloadData()
+                self?.documentsBtn.isEnabled = true
+            }
+        }
+        
+    }
     
+    @IBAction func documentsBtnAction(_ sender: Any) {
+        self.documentsBtn.backgroundColor = .lightGray
+        self.photosBtn.backgroundColor = .none
+        self.photosBtn.isEnabled = false
+        self.dataCollectionView.isHidden = true
+        self.activityIndicator.startAnimating()
+        storageDataViewModel.getFile("Documents"){
+            DispatchQueue.main.async {
+                self.resetComponentsToDefault()
+                self.photosBtn.isEnabled = true
+                self.dataCollectionView.reloadData()
+            }
+        }showNote: { [weak self] note,isFailed in
+            self?.view.makeToast(note)
+            if isFailed{
+                self?.resetComponentsToDefault()
+                self?.photosBtn.isEnabled = true
+                self?.dataCollectionView.reloadData()
+            }
+        }
+    }
+    //
+    //MARK: Sign Out
+    //
     @IBAction func signoutBtnAction(_ sender: Any) {
         let firebaseAuth = Auth.auth()
         do {
@@ -66,11 +122,14 @@ extension HomeViewController: UIImagePickerControllerDelegate,UINavigationContro
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         self.dismiss(animated: true) {
             let imageURL = info[UIImagePickerController.InfoKey.imageURL] as! URL
+            self.dataCollectionView.isHidden = true
+            self.activityIndicator.startAnimating()
             self.storageDataViewModel.uploadData(folderName: "Photos", dataName: imageURL.lastPathComponent, path: imageURL) {
-                self.storageDataViewModel.getFile("Photos"){
-                    DispatchQueue.main.async {
-                        self.dataCollectionView.reloadData()
-                    }
+                self.PhotosBtnAction(UIButton())
+            }showNote: { [weak self] note,isFailed in
+                self?.view.makeToast(note)
+                if isFailed{
+                    self?.resetComponentsToDefault()
                 }
             }
         }
@@ -84,7 +143,6 @@ extension HomeViewController: UIImagePickerControllerDelegate,UINavigationContro
             present(imagePicker, animated: true, completion: nil)
         }
     }
-    
 }
 //
 //MARK: UIDocumentPickerDelegate
@@ -93,14 +151,16 @@ extension HomeViewController: UIDocumentPickerDelegate{
     
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         guard let docURL = urls.first else {return}
+        self.dataCollectionView.isHidden = true
+        self.activityIndicator.startAnimating()
         self.storageDataViewModel.uploadData(folderName: "Documents", dataName: docURL.lastPathComponent, path: docURL) {
-            self.storageDataViewModel.getFile("Documents"){
-                DispatchQueue.main.async {
-                    self.dataCollectionView.reloadData()
-                }
+            self.documentsBtnAction(UIButton())
+        }showNote: { [weak self] note,isFailed in
+            self?.view.makeToast(note)
+            if isFailed{
+                self?.resetComponentsToDefault()
             }
         }
-        print("import result : \(docURL)")
     }
     
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
@@ -114,7 +174,6 @@ extension HomeViewController: UIDocumentPickerDelegate{
         importMenu.modalPresentationStyle = .formSheet
         self.present(importMenu, animated: true, completion: nil)
     }
-    
 }
 //
 //MARK: UICollectionViewDataSource
@@ -142,34 +201,9 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
     
     private func addLayout() {
-           let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-           layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-           layout.scrollDirection = .vertical
-           dataCollectionView?.collectionViewLayout = layout
-       }
-}
-//
-//MARK: Download Image
-//
-extension UIImageView {
-    
-    func downloaded(from url: URL, contentMode mode: ContentMode = .scaleAspectFit) {
-        contentMode = mode
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil,
-                let image = UIImage(data: data)
-            else { return }
-            DispatchQueue.main.async() { [weak self] in
-                self?.image = image
-            }
-        }.resume()
-    }
-    
-    func downloaded(from link: String, contentMode mode: ContentMode = .scaleAspectFit) {
-        guard let url = URL(string: link) else { return }
-        downloaded(from: url, contentMode: mode)
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.scrollDirection = .vertical
+        dataCollectionView?.collectionViewLayout = layout
     }
 }

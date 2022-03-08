@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="331" height="178"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="DOCX" translatesAutoresizingMaskIntoConstraints="NO" id="62O-6Q-rxo">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Gallery" translatesAutoresizingMaskIntoConstraints="NO" id="62O-6Q-rxo">
                         <rect key="frame" x="10" y="34" width="311" height="113.5"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jK-g6-jLN">
@@ -48,6 +48,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="DOCX" width="225" height="225"/>
+        <image name="Gallery" width="640" height="640"/>
     </resources>
 </document>
