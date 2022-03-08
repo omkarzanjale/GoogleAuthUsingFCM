@@ -11,9 +11,6 @@ import GoogleSignIn
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseFirestore
-import FirebaseStorage
-
-import UIKit
 
 class UserViewModel {
     
@@ -25,8 +22,6 @@ class UserViewModel {
     
     private let firestoreDatabase = Firestore.firestore()
     var counter = Int()
-    
-    private var storageRef = Storage.storage().reference()
     
     typealias failureClosure = ()->()
     typealias successClosure = ()->()
@@ -252,46 +247,6 @@ class UserViewModel {
                 }else {
                     print(error!.localizedDescription)
                     failed()
-                }
-            }
-        }
-    }
-    //
-    //MARK: Storage
-    //
-    func uploadData(folderName: String,dataName:String ,path: URL) {
-        let photosRef = storageRef.child(folderName)
-        let ref = photosRef.child(dataName)
-        ref.putFile(from: path, metadata: StorageMetadata()) { metadata, error in
-            guard let _ = metadata else {
-                return
-            }
-            photosRef.downloadURL { (url, error) in
-                guard let downloadURL = url else {
-                    return
-                }
-                print("Download data - URL : ",downloadURL)
-            }
-        }
-    }
-    
-    func getFile() {
-        storageRef.child("FileData").listAll { storageRef, error in
-            for image in storageRef.items {
-                let path = image.fullPath
-                print(image.fullPath)
-                self.storageRef.child(path).downloadURL { url, err in
-                    guard let url = url else {
-                        return
-                    }
-                    URLSession.shared.dataTask(with: url) { data, respo, err in
-                        DispatchQueue.main.async {
-                            guard let data = data else {
-                                return
-                            }
-                            print(data)
-                        }
-                    }.resume()
                 }
             }
         }

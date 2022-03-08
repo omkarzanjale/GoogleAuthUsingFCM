@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCollectionViewCell" id="gTV-IL-0wX" customClass="ImageCollectionViewCell" customModule="GoogleAuthUsingFCM" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="331" height="178"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="331" height="178"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="DOCX" translatesAutoresizingMaskIntoConstraints="NO" id="62O-6Q-rxo">
+                        <rect key="frame" x="10" y="34" width="311" height="113.5"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2jK-g6-jLN">
+                        <rect key="frame" x="5" y="152.5" width="321" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" red="0.95313266929999996" green="0.75221909600000003" blue="0.53276522079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="2jK-g6-jLN" secondAttribute="trailing" constant="5" id="5Gb-bp-5it"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="top" secondItem="62O-6Q-rxo" secondAttribute="top" constant="10" id="5bw-jK-lNv"/>
+                <constraint firstItem="2jK-g6-jLN" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="5" id="5it-sc-bCj"/>
+                <constraint firstItem="62O-6Q-rxo" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" constant="10" id="IkZ-R5-QUy"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="2jK-g6-jLN" secondAttribute="bottom" constant="5" id="TKa-M2-jRk"/>
+                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="62O-6Q-rxo" secondAttribute="trailing" constant="10" id="VeV-Pr-VIU"/>
+                <constraint firstItem="2jK-g6-jLN" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="raD-0i-5Ty"/>
+                <constraint firstItem="2jK-g6-jLN" firstAttribute="top" secondItem="62O-6Q-rxo" secondAttribute="bottom" constant="5" id="zuk-O2-YS8"/>
+            </constraints>
+            <size key="customSize" width="331" height="178"/>
+            <connections>
+                <outlet property="img" destination="62O-6Q-rxo" id="U86-M7-t71"/>
+                <outlet property="lblFileName" destination="2jK-g6-jLN" id="Q3V-g9-9P4"/>
+            </connections>
+            <point key="canvasLocation" x="335.50724637681162" y="107.8125"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="DOCX" width="225" height="225"/>
+    </resources>
+</document>
