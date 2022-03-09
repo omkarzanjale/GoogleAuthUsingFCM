@@ -54,6 +54,8 @@ class HomeViewController: UIViewController {
     @IBAction func uploadImgBtnAction(_ sender: Any) {
         imagePickerControllerConfig()
     }
+    
+    
     //
     //MARK: Display File Btns Action
     //
