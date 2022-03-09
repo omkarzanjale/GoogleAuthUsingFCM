@@ -30,8 +30,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
             break
         default:
             self.img.tintColor = .black
-            self.img.contentMode = .scaleAspectFit
-            self.img.image = UIImage(systemName: "doc")
+            self.img.image = UIImage(named: "file")
         }
     }
     

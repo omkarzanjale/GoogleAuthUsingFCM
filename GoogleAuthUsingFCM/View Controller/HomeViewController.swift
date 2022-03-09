@@ -10,7 +10,6 @@ import GoogleSignIn
 import FirebaseAuth
 import MobileCoreServices
 import UniformTypeIdentifiers
-import Toast_Swift
 
 class HomeViewController: UIViewController {
     
@@ -20,8 +19,8 @@ class HomeViewController: UIViewController {
     var storageDataViewModel = StorageDataViewModel()
 
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var photosBtn: UIButton!
-    @IBOutlet weak var documentsBtn: UIButton!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var uploadBtn: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var dataCollectionView: UICollectionView!
    
@@ -33,6 +32,7 @@ class HomeViewController: UIViewController {
     private func resetComponentsToDefault() {
         self.activityIndicator.stopAnimating()
         self.dataCollectionView.isHidden = false
+        self.segmentedControl.isEnabled = true
     }
     
     private func config() {
@@ -41,65 +41,58 @@ class HomeViewController: UIViewController {
         guard let user = userData as? User else {return}
         self.userNameLabel.text = user.displayName
         self.dataCollectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCollectionViewCell")
-        addLayout()
-        PhotosBtnAction(UIButton())
+        self.addLayout()
+        self.uploadNewFile()
+        self.segmentedControl.selectedSegmentIndex = 0
+        self.segentedControlAction(nil)
     }
     //
-    //MARK: Upload data
+    //MARK: Upload new files
     //
-    @IBAction func uploadFileBtnAction(_ sender: Any) {
-        docControllorConfig()
+    private func uploadNewFile() {
+        let uploadImageMenu = UIAction(title: "Photo", image: UIImage(systemName: "photo.on.rectangle.angled"), identifier: nil) { _ in
+            self.imagePickerControllerConfig()
+        }
+        let uploadFileMenu = UIAction(title: "File", image: UIImage(systemName: "doc.badge.plus"), identifier: nil) { _ in
+            self.docControllorConfig()
+        }
+        let uploadMenus = UIMenu(title: "", image: nil, identifier: nil, children: [uploadImageMenu,uploadFileMenu])
+        self.uploadBtn.menu = uploadMenus
+        self.uploadBtn.showsMenuAsPrimaryAction = true
     }
-    
-    @IBAction func uploadImgBtnAction(_ sender: Any) {
-        imagePickerControllerConfig()
-    }
-    
-    
     //
-    //MARK: Display File Btns Action
+    //MARK: Get Files
     //
-    @IBAction func PhotosBtnAction(_ sender: Any) {
-        self.photosBtn.backgroundColor = .lightGray
-        self.documentsBtn.backgroundColor = .none
-        self.documentsBtn.isEnabled = false
+    private func getFiles(for identifier: String) {
+        self.segmentedControl.isEnabled = false
         self.dataCollectionView.isHidden = true
         self.activityIndicator.startAnimating()
-        storageDataViewModel.getFile("Photos"){
+        storageDataViewModel.getFile(identifier){
             DispatchQueue.main.async {
                 self.resetComponentsToDefault()
                 self.dataCollectionView.reloadData()
-                self.documentsBtn.isEnabled = true
             }
         }showNote: { [weak self] note,isFailed in
             self?.view.makeToast(note)
             if isFailed{
                 self?.resetComponentsToDefault()
                 self?.dataCollectionView.reloadData()
-                self?.documentsBtn.isEnabled = true
             }
         }
-        
     }
     
-    @IBAction func documentsBtnAction(_ sender: Any) {
-        self.documentsBtn.backgroundColor = .lightGray
-        self.photosBtn.backgroundColor = .none
-        self.photosBtn.isEnabled = false
-        self.dataCollectionView.isHidden = true
-        self.activityIndicator.startAnimating()
-        storageDataViewModel.getFile("Documents"){
-            DispatchQueue.main.async {
-                self.resetComponentsToDefault()
-                self.photosBtn.isEnabled = true
+    @IBAction func segentedControlAction(_ sender: Any?) {
+        if segmentedControl.selectedSegmentIndex == 0{
+            if self.storageDataViewModel.photosArray.isEmpty{
+                self.getFiles(for: "Photos")
+            }else {
                 self.dataCollectionView.reloadData()
             }
-        }showNote: { [weak self] note,isFailed in
-            self?.view.makeToast(note)
-            if isFailed{
-                self?.resetComponentsToDefault()
-                self?.photosBtn.isEnabled = true
-                self?.dataCollectionView.reloadData()
+        }else {
+            if self.storageDataViewModel.filesArray.isEmpty {
+                self.getFiles(for: "Documents")
+            }else {
+                self.dataCollectionView.reloadData()
             }
         }
     }
@@ -124,11 +117,11 @@ extension HomeViewController: UIImagePickerControllerDelegate,UINavigationContro
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         self.dismiss(animated: true) {
             let imageURL = info[UIImagePickerController.InfoKey.imageURL] as! URL
-            self.dataCollectionView.isHidden = true
-            self.activityIndicator.startAnimating()
-            self.storageDataViewModel.uploadData(folderName: "Photos", dataName: imageURL.lastPathComponent, path: imageURL) {
-                self.PhotosBtnAction(UIButton())
-            }showNote: { [weak self] note,isFailed in
+            self.storageDataViewModel.uploadData(folderName: "Photos", dataName: imageURL.lastPathComponent, path: imageURL) { indexPath in
+                DispatchQueue.main.async {
+                    self.dataCollectionView.reloadItems(at: [indexPath])
+                }
+            } showNote: {[weak self] note, isFailed in
                 self?.view.makeToast(note)
                 if isFailed{
                     self?.resetComponentsToDefault()
@@ -153,11 +146,11 @@ extension HomeViewController: UIDocumentPickerDelegate{
     
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         guard let docURL = urls.first else {return}
-        self.dataCollectionView.isHidden = true
-        self.activityIndicator.startAnimating()
-        self.storageDataViewModel.uploadData(folderName: "Documents", dataName: docURL.lastPathComponent, path: docURL) {
-            self.documentsBtnAction(UIButton())
-        }showNote: { [weak self] note,isFailed in
+        self.storageDataViewModel.uploadData(folderName: "Documents", dataName: docURL.lastPathComponent, path: docURL) { indexPath in
+            DispatchQueue.main.async {
+                self.dataCollectionView.reloadItems(at: [indexPath])
+            }
+        } showNote: {[weak self] note, isFailed in
             self?.view.makeToast(note)
             if isFailed{
                 self?.resetComponentsToDefault()
@@ -182,13 +175,21 @@ extension HomeViewController: UIDocumentPickerDelegate{
 //
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            return storageDataViewModel.photosArray.count
+        }
         return storageDataViewModel.filesArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = dataCollectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as? ImageCollectionViewCell {
-            let file = storageDataViewModel.filesArray[indexPath.row]
-            cell.fetchData(file: file)
+            if segmentedControl.selectedSegmentIndex == 0{
+                let file = storageDataViewModel.photosArray[indexPath.row]
+                cell.fetchData(file: file)
+            }else {
+                let file = storageDataViewModel.filesArray[indexPath.row]
+                cell.fetchData(file: file)
+            }
             return cell
         }
         return UICollectionViewCell()

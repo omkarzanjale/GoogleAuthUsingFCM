@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseCore
 import GoogleSignIn
+import Toast_Swift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
